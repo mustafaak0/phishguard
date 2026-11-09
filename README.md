@@ -43,6 +43,19 @@ python phishguard.py predict "https://github.com/mustafaak0" "http://paypa1-secu
     → ⚠ PHISHING (confidence 93.1%)  risk=0.931
 ```
 
+Holdout evaluation on the demo dataset: **accuracy 0.92 · phishing precision 1.00 · recall 0.86**
+
+## ⚙️ Dual Backend
+
+PhishGuard runs everywhere — even under restrictive policies:
+
+| Backend | When | Notes |
+|---------|------|-------|
+| scikit-learn `LogisticRegression` | if importable | reference implementation |
+| **built-in pure-NumPy LR** | sklearn can't load (e.g. Windows **Smart App Control** blocking SciPy DLLs) | gradient descent + feature standardization, same results |
+
+Only hard dependency: `numpy`. scikit-learn is optional — the backend is picked automatically at runtime.
+
 ## ⚠️ Dataset Note
 
 The bundled `data/dataset.csv` is a **small synthetic demo set** for education.
